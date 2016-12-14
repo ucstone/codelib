@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #coding:utf-8
+#Author:gui74053@gmail.com
 import json
 import requests as req
 import urllib
