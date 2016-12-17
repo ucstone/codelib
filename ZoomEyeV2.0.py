@@ -54,7 +54,7 @@ class Zoomeye(object):
                 elif searchtype == 'web':
                     for match in page_content['matches']:
                         res_line = match['ip'][0] +'\t'+ match['title'] +'\t'+ 'http://' + match['site']
-                        print res_line #此行可注释，不影响查询结果
+                        print match['ip'][0]
                         self.save_result(str(res_line).encode('utf-8'))
             else:
                 print "Error Code: %s" % result_page.status_code
