@@ -94,5 +94,4 @@ if __name__ == "__main__":
     # 查看当月还有多少剩余查询结果
     print z.resource_info()
     # 查询
-    # print z.search("city:shijiazhuang webapp:dd", searchtype="host",page=1)
-    print z.search(keyword="city:shijiazhuang openssh", searchtype='host', page=37)
+    print z.search(keyword="city:shandong openssh", searchtype='host', page=37)
