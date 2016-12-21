@@ -14,8 +14,6 @@ class Zoomeye(object):
         self._headers = {"Authorization": "JWT %s" % self.get_token(), "Content-Type": "application/json"}
 
     def get_token(self):
-        payload = {"username": "595126297@qq.com", "password": "5063785@sha"}
-        # payload = {"username": "stone@sec.dog", "password": "Ixw3vFVc65Kk"}
         # payload = {"username": "你的ZoomEye账号", "password": "你的ZoomEye密码"}
         try:
             res = req.post('https://api.zoomeye.org/user/login', data=json.dumps(payload))
