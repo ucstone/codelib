@@ -15,7 +15,7 @@ reload(__import__('sys')).setdefaultencoding('utf-8')
 # 提取nmap扫描结果文件
 def deal_nmap_xml(xml_name, save_name):
     tree = ET.parse(xml_name)
-    # res_file = open(save_name + '-all.txt', 'w') #生成过程文件
+    res_file = open(save_name + '-all.txt', 'w') #生成过程文件
     root = tree.getroot()
     count = []  # 统计存活IP地址数量
     IP_ALL = []  # 开放端口总数
@@ -37,12 +37,12 @@ def deal_nmap_xml(xml_name, save_name):
                                         if port.attrib.has_key('portid'):
                                             # print IP + ":" + port.attrib.get('portid')
                                             lll = IP + ":" + port.attrib.get('portid') + '\n'
-                                            # res_file.write(lll)
+                                            res_file.write(lll)
                                             IP_ALL.append(lll)
 
     print "There are  %d surviving!" % len(count)
     print "Open port has: %d" % len(IP_ALL)
-    # res_file.close()
+    res_file.close()
     return IP_ALL
 
 
@@ -54,8 +54,8 @@ def get_ip(ALL, ports):
             if len(line.split(':'))>2:
                 print line.strip()+" Exception"
             if port == line.split(':')[1].strip():
-                 # print line,
-                 port_file.append(line)
+                # print line,
+                port_file.append(line)
     print "Port extraction is complete!"
     return port_file
 
@@ -76,7 +76,7 @@ def nmap_platform_cmp(file, pfile):
     for txt_file in os.listdir('.'):
         if txt_file.endswith('.txt'):
             file_list.append(txt_file)
-
+    f3 = open('del.txt','w+')
     for txt_file in file_list:
         result = []
         if txt_file.endswith('.txt'):
@@ -89,6 +89,8 @@ def nmap_platform_cmp(file, pfile):
                         if xx in yy_ip:  # 若新扫描的资产在合规平台中，则说明已经上报并剔除
                             result.append(xx)
                             xx_ip.remove(xx)  # 删除已经报备过的IP
+                        else:
+                            f3.writelines(xx)
 
                 # print xx_ip
                 print u"After removal", len(xx_ip)
@@ -98,6 +100,7 @@ def nmap_platform_cmp(file, pfile):
                     for ip in xx_ip:
                         zz_file.writelines(ip)
 
+        f3.close()
         print u"Has been reported:%d" % len(result)
         with open(txt_file, 'r') as xx:
             # xx.readlines()
